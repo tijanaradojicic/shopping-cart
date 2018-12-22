@@ -8,7 +8,7 @@ class FormComponent extends React.Component{
         image:""
     }
 
-   
+  
 
     handleChange = event => {
         this.setState({[event.target.name]: event.target.value})
@@ -18,6 +18,7 @@ class FormComponent extends React.Component{
         event.preventDefault();
         this.props.addProduct(this.state);
       }
+
 
     render(){
         return (
