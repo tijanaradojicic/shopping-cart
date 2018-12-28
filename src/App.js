@@ -9,9 +9,9 @@ class App extends Component {
     super(props);
     this.state={
       products: [
-        {id:1, name: "Sample Watch", price:300, description:"", image:"url"},
+        /*{id:1, name: "Sample Watch", price:300, description:"", image:"url"},
         {id:2, name: "Product #2", price:199, description:"", image:"url"},
-        {id:3, name: "Product #2", price:199, description:"", image:"url"}
+        {id:3, name: "Product #2", price:199, description:"", image:"url"}*/
         
       ],
       shoppingCartProducts: {},
@@ -42,8 +42,19 @@ class App extends Component {
       ...product,
       id: this.state.products.length+1
     }
-    this.setState({products:[...this.state.products, product]})
-  
+    this.setState({products:[...this.state.products, product]},()=>{
+      localStorage.setItem("products",JSON.stringify(this.state.products))
+    })
+  }
+
+  componentDidMount(){
+    const products = localStorage.getItem("products");
+    setTimeout(()=> {
+      this.setState({
+        products: JSON.parse(products || '[]')
+      })
+    },1000)
+    
   }
 
   minusQuantity = (obj) =>{
